@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LALUMPARUN — QR Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10241C;
+    --emerald:#0EAD69;
+    --mint:#C9F5DC;
+    --paper:#F6F3EA;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    text-align:center;
+    padding:40px 20px;
+  }
+  .qr-box{
+    background:#fff;
+    border-radius:24px;
+    padding:40px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .qr-box img{
+    width:260px;
+    height:260px;
+    display:block;
+    margin:0 auto 24px;
+    border-radius:12px;
+  }
+  h1{
+    font-family:'Anton', sans-serif;
+    font-size:48px;
+    letter-spacing:1px;
+    margin-bottom:8px;
+  }
+  h1 span{
+    background:var(--emerald);
+    color:var(--ink);
+    padding:4px 16px 8px;
+    display:inline-block;
+    clip-path:polygon(0% 18%, 3% 0%, 9% 14%, 15% 2%, 22% 16%, 29% 0%, 36% 12%, 44% 1%, 52% 15%, 60% 2%, 68% 13%, 76% 0%, 84% 14%, 92% 3%, 100% 12%, 100% 100%, 0% 100%);
+  }
+  p{
+    color:rgba(201,245,220,0.7);
+    font-size:16px;
+    margin-top:6px;
+  }
+  .url{
+    margin-top:20px;
+    color:var(--emerald);
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.5px;
+  }
+  .hint{
+    margin-top:32px;
+    font-size:13px;
+    color:rgba(201,245,220,0.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="qr-box">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://lalumparun.vercel.app&bgcolor=FFFFFF&color=10241C&margin=20" alt="QR Code LALUMPARUN">
+</div>
+
+<h1><span>LALUMPARUN.ID</span></h1>
+<p>Scan QR ini buat langsung ke website</p>
+<div class="url">lalumparun.vercel.app</div>
+<div class="hint">Cetak &amp; taruh di titik kumpul</div>
+
+</body>
+</html>
