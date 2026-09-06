@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LALUMPARUN — Komunitas Lari Bandung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EA;
+    --paper-2:#EFEAD9;
+    --ink:#10241C;
+    --ink-soft:#3A4C43;
+    --emerald:#0EAD69;
+    --emerald-dark:#0A7A4C;
+    --emerald-deep:#0C3626;
+    --mint:#C9F5DC;
+    --mint-2:#DFF7E9;
+    --amber:#F0A63B;
+    --line:rgba(16,36,28,0.12);
+    --radius-s: 4px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:0.2px;
+    line-height:0.98;
+    margin:0;
+    text-transform:uppercase;
+  }
+  p{margin:0;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:100px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--ink); color:var(--mint);}
+  .btn-primary:hover{background:var(--emerald-deep); color:#fff;}
+  .btn-ghost{background:transparent; border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .btn-on-dark{background:var(--emerald); color:var(--ink);}
+  .btn-on-dark:hover{background:var(--mint);}
+  ::selection{background:var(--emerald); color:#fff;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(246,243,234,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  header.scrolled{border-color:var(--line); box-shadow:0 6px 18px rgba(16,36,28,0.06);}
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:78px;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:34px; width:auto;}
+  .nav-links{display:flex; align-items:center; gap:34px; font-weight:600; font-size:15px;}
+  .nav-links a{position:relative; padding:4px 0;}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
+    background:var(--emerald); transform:scaleX(0); transform-origin:left;
+    transition:transform .22s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .burger{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .burger span{display:block; width:24px; height:2px; background:var(--ink); margin:5px 0; transition:.25s;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FBF2DE 0%, var(--paper) 62%);
+    padding-top:64px;
+  }
+  .hero .wrap{
+    position:relative; z-index:3;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:40px;
+    align-items:center;
+    padding-bottom:40px;
+  }
+  .hero-eyebrow-free{
+    font-size:15px; font-weight:600; color:var(--ink-soft); margin-bottom:18px;
+  }
+  .hero-eyebrow-free b{color:var(--emerald-dark);}
+  .hero h1{
+    font-size:clamp(42px, 6.4vw, 78px);
+    color:var(--ink);
+  }
+  .hero h1 .torn{
+    background:var(--ink);
+    color:var(--mint);
+    padding:2px 14px 6px;
+    display:inline-block;
+    clip-path:polygon(0% 18%, 3% 0%, 9% 14%, 15% 2%, 22% 16%, 29% 0%, 36% 12%, 44% 1%, 52% 15%, 60% 2%, 68% 13%, 76% 0%, 84% 14%, 92% 3%, 100% 12%, 100% 100%, 0% 100%);
+    margin-bottom:6px;
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:52ch;
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;}
+  .hero-stat-row{
+    display:flex; gap:36px; margin-top:46px; flex-wrap:wrap;
+  }
+  .hero-stat b{
+    font-family:'Anton', sans-serif; font-size:30px; display:block; color:var(--emerald-dark);
+  }
+  .hero-stat span{font-size:13.5px; color:var(--ink-soft); max-width:16ch; display:block;}
+
+  .hero-art{position:relative; height:420px;}
+  .hero-art svg{position:absolute; inset:0; width:100%; height:100%;}
+
+  /* torn divider between sections */
+  .torn-divider{
+    height:52px;
+    width:100%;
+    position:relative;
+    z-index:2;
+  }
+  .torn-divider svg{display:block; width:100%; height:100%;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:50px;
+    margin-bottom:56px;
+    align-items:end;
+  }
+  .section-head h2{font-size:clamp(32px,4.4vw,50px);}
+  .kicker{
+    font-weight:700; color:var(--emerald-dark); font-size:15px; margin-bottom:10px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--paper);}
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:60px; align-items:start;}
+  .about-text p{font-size:18px; color:var(--ink-soft); max-width:60ch;}
+  .about-text p + p{margin-top:18px;}
+  .fact-list{display:flex; flex-direction:column; gap:0;}
+  .fact-item{
+    padding:20px 0;
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+  }
+  .fact-item:last-child{border-bottom:1px solid var(--line);}
+  .fact-item b{font-family:'Anton'; font-size:26px; white-space:nowrap;}
+  .fact-item span{font-size:14px; color:var(--ink-soft); text-align:right;}
+
+  /* ---------- EVENT / DARK ---------- */
+  .event{
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  .event::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-radial-gradient(circle at 15% 30%, transparent 0, transparent 60px, rgba(201,245,220,0.05) 61px, rgba(201,245,220,0.05) 62px),
+      repeating-radial-gradient(circle at 85% 70%, transparent 0, transparent 80px, rgba(201,245,220,0.05) 81px, rgba(201,245,220,0.05) 82px);
+    pointer-events:none;
+  }
+  .event .wrap{position:relative; z-index:1;}
+  .event-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center;}
+  .event h2{color:var(--paper); font-size:clamp(30px,4vw,44px); max-width:14ch;}
+  .event-meta{display:flex; flex-wrap:wrap; gap:28px; margin-top:26px;}
+  .event-meta div{font-size:15px; color:var(--mint-2);}
+  .event-meta strong{display:block; font-family:'Anton'; font-size:18px; color:var(--mint); font-weight:400; margin-bottom:2px;}
+  .event-actions{margin-top:36px;}
+
+  /* elevation chart card */
+  .elev-card{
+    background:var(--emerald-deep);
+    border-radius:18px;
+    padding:30px 26px 24px;
+  }
+  .elev-card h3{color:var(--mint); font-size:20px; margin-bottom:4px;}
+  .elev-card .route-name{color:var(--mint-2); font-size:14px; margin-bottom:20px; display:block;}
+  .elev-chart{width:100%; height:auto;}
+  .elev-chart path.line{
+    fill:none; stroke:var(--emerald); stroke-width:3; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .elev-chart path.fillarea{fill:url(#elevGradient);}
+  /* progressive enhancement: only animate the reveal if JS adds .js-armed */
+  .elev-chart.js-armed path.line{
+    stroke-dasharray:600; stroke-dashoffset:600;
+    transition:stroke-dashoffset 1.4s ease;
+  }
+  .elev-chart.js-armed.in-view path.line{stroke-dashoffset:0;}
+  .elev-chart.js-armed path.fillarea{opacity:0; transition:opacity 1s ease .4s;}
+  .elev-chart.js-armed.in-view path.fillarea{opacity:1;}
+  .elev-labels{display:flex; justify-content:space-between; margin-top:6px;}
+  .elev-labels span{font-size:11px; color:var(--mint-2); max-width:70px;}
+
+  /* ---------- JOIN FORM ---------- */
+  .join{background:var(--paper);}
+  .join-grid{display:grid; grid-template-columns:1fr 0.9fr; gap:60px; align-items:start;}
+  .join h2{font-size:clamp(30px,4vw,46px); max-width:12ch;}
+  .join-sub{margin-top:16px; color:var(--ink-soft); font-size:17px; max-width:48ch;}
+  .checklist{list-style:none; margin:30px 0 0; padding:0; display:flex; flex-direction:column; gap:16px;}
+  .checklist li{display:flex; gap:14px; align-items:flex-start; font-size:15px; color:var(--ink-soft);}
+  .checklist li::before{
+    content:"";
+    flex:none;
+    width:20px; height:20px; margin-top:2px;
+    border-radius:5px;
+    background:var(--emerald);
+    -webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 20 8l-1.4-1.4z"/></svg>') no-repeat center / 60%;
+    mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 20 8l-1.4-1.4z"/></svg>') no-repeat center / 60%;
+  }
+
+  form.signup{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:34px;
+  }
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-size:13.5px; font-weight:700; margin-bottom:8px; color:var(--ink);}
+  .field input, .field select{
+    width:100%;
+    padding:13px 14px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    font-family:inherit;
+    font-size:15px;
+    background:var(--paper);
+    color:var(--ink);
+    transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus{border-color:var(--emerald); outline:none;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  form.signup button{width:100%; justify-content:center; margin-top:6px;}
+  .form-note{font-size:12.5px; color:var(--ink-soft); margin-top:14px; text-align:center;}
+  .form-success{
+    display:none;
+    background:var(--mint-2);
+    border:1px solid var(--emerald);
+    border-radius:12px;
+    padding:16px 18px;
+    font-size:14.5px;
+    margin-top:16px;
+    color:var(--emerald-deep);
+    font-weight:600;
+  }
+  .form-success.show{display:block;}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--paper);}
+  .faq .wrap{max-width:820px;}
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    padding:24px 4px; font-family:'Plus Jakarta Sans'; font-size:18px; font-weight:700; color:var(--ink);
+  }
+  .faq-q .plus{
+    flex:none; width:26px; height:26px; position:relative;
+  }
+  .faq-q .plus::before, .faq-q .plus::after{
+    content:""; position:absolute; background:var(--ink); border-radius:2px;
+  }
+  .faq-q .plus::before{width:100%; height:2.5px; top:50%; left:0; transform:translateY(-50%);}
+  .faq-q .plus::after{height:100%; width:2.5px; left:50%; top:0; transform:translateX(-50%); transition:transform .25s ease;}
+  .faq-item.open .faq-q .plus::after{transform:translateX(-50%) rotate(90deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .3s ease;
+  }
+  .faq-a p{padding:0 4px 26px; font-size:15.5px; color:var(--ink-soft); max-width:62ch;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:var(--mint-2); padding:70px 0 28px;}
+  .footer-top{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(201,245,220,0.15);}
+  .footer-brand img{height:36px; margin-bottom:16px;}
+  .footer-brand p{max-width:34ch; font-size:14.5px; color:rgba(223,247,233,0.7);}
+  .footer-col h4{font-family:'Plus Jakarta Sans'; text-transform:none; font-size:14px; font-weight:700; color:var(--mint); margin-bottom:16px;}
+  .footer-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;}
+  .footer-col a{font-size:14.5px; color:rgba(223,247,233,0.75); transition:color .2s;}
+  .footer-col a:hover{color:var(--mint);}
+  .social-row{display:flex; gap:10px; margin-top:18px;}
+  .social-pill{
+    width:38px; height:38px; border-radius:50%; background:rgba(201,245,220,0.1);
+    display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;
+    color:var(--mint); border:1px solid rgba(201,245,220,0.25);
+    transition:background .2s, color .2s;
+  }
+  .social-pill:hover{background:var(--emerald); color:var(--ink);}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:24px; font-size:13px; color:rgba(223,247,233,0.55); flex-wrap:wrap; gap:10px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr; padding-top:20px;}
+    .hero-art{height:280px; order:-1;}
+    .about-grid, .event-grid, .join-grid{grid-template-columns:1fr; gap:36px;}
+    .section-head{grid-template-columns:1fr; gap:16px;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr); row-gap:36px;}
+    .stat-cell:nth-child(3){border-left:none;}
+    .footer-top{grid-template-columns:1fr; gap:34px;}
+  }
+  @media (max-width:720px){
+    .nav-links{
+      position:fixed; top:78px; left:0; right:0; bottom:0;
+      background:var(--paper);
+      flex-direction:column; align-items:flex-start; padding:34px 28px; gap:24px;
+      font-size:19px;
+      transform:translateX(100%);
+      transition:transform .3s ease;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-cta .btn-ghost{display:none;}
+    .burger{display:block;}
+    .field-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="brand"><img src="logo-transparent.png" alt="LALUMPARUN"></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#tentang">Tentang</a>
+      <a href="#lari-bareng">Lari Bareng</a>
+      <a href="#gabung">Gabung</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#gabung" class="btn btn-ghost" style="padding:10px 20px; font-size:14px;">Gabung</a>
+      <button class="burger" id="burgerBtn" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1><span class="torn">LALUMPARUN.ID</span><br>Fokus pada tujuan, bukan hambatan.</h1>
+        <p class="hero-sub">LALUMPARUN baru resmi jalan tahun ini, dibentuk dua pelajar SMP di Bandung yang hobi olahraga. Tiap Minggu pagi kita rutinan lari bareng — nggak peduli baru pertama kali ikut atau udah biasa lomba.</p>
+        <div class="hero-actions">
+          <a href="#gabung" class="btn btn-primary">Gabung Lari Minggu Ini</a>
+          <a href="#lari-bareng" class="btn btn-ghost">Lihat Rute</a>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat"><b>2026</b><span>tahun LALUMPARUN pertama kali lari bareng</span></div>
+          <div class="hero-stat"><b>3</b><span>pace group, dari santai sampai serius</span></div>
+          <div class="hero-stat"><b>Gratis</b><span>rutinan, selamanya</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 480 420" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Ilustrasi kontur bukit dan siluet pelari di Bandung">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F7DFAE"/>
+              <stop offset="100%" stop-color="#F6F3EA"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="480" height="420" fill="url(#skyGrad)" rx="18"/>
+          <circle cx="360" cy="90" r="42" fill="#F0A63B" opacity="0.9"/>
+          <g fill="none" stroke="#0EAD69" stroke-width="1.6" opacity="0.55">
+            <path d="M0 190 C 80 160, 140 210, 220 175 S 360 150, 480 185"/>
+            <path d="M0 215 C 80 185, 140 235, 220 200 S 360 175, 480 210"/>
+            <path d="M0 240 C 80 210, 140 260, 220 225 S 360 200, 480 235"/>
+          </g>
+          <path d="M0 260 L 60 180 L 110 240 L 170 140 L 230 250 L 290 190 L 350 260 L 410 170 L 480 245 L 480 420 L 0 420 Z" fill="#0C3626"/>
+          <path d="M0 300 L 70 250 L 130 290 L 200 220 L 260 300 L 330 240 L 400 300 L 480 260 L 480 420 L 0 420 Z" fill="#0EAD69"/>
+          <g transform="translate(150,300)">
+            <circle cx="34" cy="10" r="11" fill="#10241C"/>
+            <path d="M34 20 L28 55 L14 78 M34 20 L46 50 L30 60 M34 20 L20 40 M34 20 L52 30" stroke="#10241C" stroke-width="7" stroke-linecap="round" fill="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="torn-divider" aria-hidden="true">
+      <svg viewBox="0 0 100 6" preserveAspectRatio="none"><polygon points="0,6 100,6 100,2.4 93,0.3 87,2.4 80,0.5 73,2.3 67,0.2 60,2.5 53,0.4 47,2.2 40,0.2 33,2.4 27,0.4 20,2.3 13,0.3 7,2.4 0,0.4" fill="#EFEAD9"/></svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="tentang">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Kenapa Lalumparun Ada</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>LALUMPARUN lahir dari obrolan iseng dua pelajar SMP di Bandung pertengahan tahun ini. Keduanya emang udah suka olahraga — ada yang ikut ekskul atletik, ada yang otodidak lari sendirian tiap sore — tapi belum ada wadah buat kumpul bareng di luar sekolah.</p>
+          <p>Jadi diputuskan: bikin komunitas sendiri. Pertama kali lari bareng cuma diikuti segelintir orang yang japri lewat story Instagram. Sekarang, tiap Minggu, makin banyak pelajar dari berbagai sekolah di Bandung yang ikut nimbrung — dan karena komunitas ini masih baru banget, siapa pun yang gabung sekarang otomatis jadi bagian dari angkatan pertama.</p>
+        </div>
+        <div class="fact-list">
+          <div class="fact-item"><b>2026</b><span>Tahun LALUMPARUN pertama kali dibentuk</span></div>
+          <div class="fact-item"><b>Pelajar</b><span>Digagas SMP &amp; se-Bandung yang doyan olahraga</span></div>
+          <div class="fact-item"><b>3 Pace</b><span>Santai (7'/km), Reguler (6'/km), Kejar (5'/km)</span></div>
+          <div class="fact-item"><b>Rp0</b><span>Nggak ada biaya keanggotaan, dari awal dibentuk sampai sekarang</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="torn-divider" aria-hidden="true" style="transform:rotate(180deg);">
+    <svg viewBox="0 0 100 6" preserveAspectRatio="none"><polygon points="0,6 100,6 100,2.4 93,0.3 87,2.4 80,0.5 73,2.3 67,0.2 60,2.5 53,0.4 47,2.2 40,0.2 33,2.4 27,0.4 20,2.3 13,0.3 7,2.4 0,0.4" fill="#10241C"/></svg>
+  </div>
+
+  <!-- EVENT + ELEVATION -->
+  <section class="event" id="lari-bareng">
+    <div class="wrap">
+      <div class="event-grid">
+        <div>
+          <h2>Rutinan lari bareng di Bandung, tiap minggu.</h2>
+          <div class="event-meta">
+            <div><strong>Lapangan Gasibu</strong>Titik kumpul &amp; garis start</div>
+            <div><strong>6K</strong>Muter ke Kiara Artha, balik santai</div>
+          </div>
+        </div>
+        <div class="elev-card">
+          <h3>Rute favorit</h3>
+          <span class="route-name">Rute: Kiara Artha → Lapangan Gasibu → putar balik</span>
+          <svg class="elev-chart" id="elevChart" viewBox="0 0 400 160" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="elevGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0EAD69" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#0EAD69" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="fillarea" d="M0 40 L40 55 L90 90 L150 120 L210 130 L260 118 L320 95 L400 130 L400 160 L0 160 Z"/>
+            <path class="line" d="M0 40 L40 55 L90 90 L150 120 L210 130 L260 118 L320 95 L400 130"/>
+          </svg>
+          <div class="elev-labels">
+            <span>Kiara Artha · 900</span>
+            <span style="text-align:right;">Gasibu · 768</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN FORM -->
+  <section class="join" id="gabung">
+    <div class="wrap">
+      <div class="join-grid">
+        <div>
+          <h2>Nggak perlu jago, cukup dateng.</h2>
+          <p class="join-sub">Isi data di bawah, kamu bakal dimasukin ke grup WhatsApp komunitas dan dapet info rutinan lari bareng tiap minggunya. Nggak ada proses seleksi.</p>
+          <ul class="checklist">
+            <li>Sepatu lari yang nyaman — nggak perlu yang mahal</li>
+            <li>Botol minum sendiri, kita nggak sedia air di rute</li>
+            <li>Kesiapan buat ngobrol pas lagi nanjak pelan-pelan</li>
+            <li>Nol tekanan buat catetan waktu — ini bukan lomba</li>
+          </ul>
+        </div>
+        <form class="signup" id="signupForm">
+          <div class="field">
+            <label for="fname">Nama lengkap</label>
+            <input type="text" id="fname" name="fname" placeholder="Nama kamu" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fwa">No. WhatsApp</label>
+              <input type="tel" id="fwa" name="fwa" placeholder="08xx xxxx xxxx" required>
+            </div>
+            <div class="field">
+              <label for="flevel">Level lari</label>
+              <select id="flevel" name="flevel">
+                <option>Pemula</option>
+                <option>Menengah</option>
+                <option>Lanjut</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="farea">Domisili di Bandung</label>
+            <input type="text" id="farea" name="farea" placeholder="Contoh: Dago, Buah Batu, Antapani">
+          </div>
+          <button type="submit" class="btn btn-primary">Daftar Gabung</button>
+          <p class="form-note">Data cuma dipakai buat undang kamu ke grup komunitas.</p>
+          <div class="form-success" id="formSuccess">Sip, kamu udah tercatat! Klik link di bawah untuk join grup WhatsApp komunitas: <a href="https://chat.whatsapp.com/XXXXX" target="_blank" style="color:var(--emerald-dark); font-weight:700; text-decoration:underline;">Join Grup WhatsApp</a></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:20px;">
+        <h2>Pertanyaan yang sering muncul</h2>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-q"><span>Saya belum pernah lari jauh, boleh ikut?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Boleh banget. Ada pace group santai (7 menit/km) khusus buat yang baru mulai, dan jaraknya bisa disesuaikan — nggak wajib nyelesain 6K penuh di pertama kali ikut.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Perlu bayar buat ikut rutinan?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Gratis. Rutinan Minggu pagi nggak pernah dipungut biaya apa pun, dari awal berdiri sampai sekarang. Cukup bawa diri sendiri dan botol minum.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Ada kegiatan selain hari Minggu?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Ada latihan interval opsional tiap Rabu malam di area Kiara, buat yang mau latihan speed. Sifatnya tambahan, bukan wajib.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Gimana caranya gabung grup komunikasi?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Isi form pendaftaran di atas. Link grup WhatsApp bakal dikirim langsung ke nomor yang kamu daftarkan, biasanya dalam 1x24 jam.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Boleh bawa anak atau anjing peliharaan?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Boleh. Ada barisan santai di belakang yang jalannya lebih pelan, cocok buat bawa keluarga atau anjing lari bareng.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo-transparent.png" alt="LALUMPARUN">
+        <p>Lari santai, ngobrolnya nggak santai. Komunitas lari mingguan yang baru dibentuk, digagas pelajar Bandung buat siapa aja yang mau mulai gerak.</p>
+        <div class="social-row">
+          <a href="#" class="social-pill" aria-label="Instagram">IG</a>
+          <a href="#" class="social-pill" aria-label="Strava">ST</a>
+          <a href="#" class="social-pill" aria-label="WhatsApp">WA</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Jelajah</h4>
+        <ul>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#lari-bareng">Lari Bareng</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Titik Kumpul</h4>
+        <ul>
+          <li>Lapangan Gasibu, Bandung</li>
+          <li>Bandung, Jawa Barat</li>
+          <li>Tiap Minggu pagi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 LALUMPARUN. Dibuat sambil ngos-ngosan di tanjakan Bandung.</span>
+      <span>lalumparun.id</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header shadow
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  // Mobile nav
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Elevation chart reveal on scroll into view (progressive enhancement —
+  // chart is fully visible by default; JS only arms the draw-in animation)
+  const elevChart = document.getElementById('elevChart');
+  if ('IntersectionObserver' in window){
+    elevChart.classList.add('js-armed');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          elevChart.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(elevChart);
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    function setState(open){
+      item.classList.toggle('open', open);
+      answer.style.maxHeight = open ? answer.scrollHeight + 'px' : '0px';
+    }
+    setState(item.classList.contains('open'));
+    btn.addEventListener('click', () => setState(!item.classList.contains('open')));
+    window.addEventListener('resize', () => {
+      if (item.classList.contains('open')) answer.style.maxHeight = answer.scrollHeight + 'px';
+    });
+  });
+
+  // Form submit (front-end only)
+  const form = document.getElementById('signupForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    success.classList.add('show');
+    form.querySelector('button').textContent = 'Terdaftar ✓';
+    form.querySelector('button').disabled = true;
+  });
+</script>
+
+</body>
+</html>
