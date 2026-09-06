@@ -91,7 +91,6 @@
     backdrop-filter:blur(10px);
     border-bottom:1px solid transparent;
     transition:border-color .25s ease, box-shadow .25s ease;
-    overflow:hidden;
   }
   header.scrolled{border-color:var(--line); box-shadow:0 6px 18px rgba(16,36,28,0.06);}
   nav.wrap{
@@ -108,7 +107,7 @@
     transition:transform .22s ease;
   }
   .nav-links a:hover::after{transform:scaleX(1);}
-  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .nav-cta{display:flex; align-items:center; gap:18px; position:relative; z-index:2;}
   .burger{display:none; background:none; border:none; cursor:pointer; padding:6px;}
   .burger span{display:block; width:24px; height:2px; background:var(--ink); margin:5px 0; transition:.25s;}
 
