@@ -357,8 +357,9 @@
       font-size:19px;
       transform:translateX(100%);
       transition:transform .3s ease;
+      pointer-events:none;
     }
-    .nav-links.open{transform:translateX(0);}
+    .nav-links.open{transform:translateX(0); pointer-events:auto;}
     .nav-cta .btn-ghost{display:none;}
     .burger{display:block;}
     .field-row{grid-template-columns:1fr;}
